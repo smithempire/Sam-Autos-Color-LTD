@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.message ? `Message: ${data.message}` : null,
       ].filter(Boolean).join('\n');
  
-      const whatsappUrl = `https://wa.me/14234326119?text=${encodeURIComponent(lines)}`;
+      const whatsappUrl = `https://wa.me/+2347058181425?text=${encodeURIComponent(lines)}`;
  
       // Open via a real anchor click rather than window.open() — this is far less
       // likely to be blocked by browser/mobile popup blockers since it mimics a
