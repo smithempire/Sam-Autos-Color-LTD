@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="style.css?v=9867499b">
+<link rel="stylesheet" href="style.css?v=1a698000">
 </head>
 <body>
 <!-- Loading Screen -->
@@ -69,7 +69,7 @@
     </ul>
  
     <div class="nav-actions">
-      <a href="https://wa.me/+2347058181425?text=Hello%20SAM%20AUTOS%20COLOR%20LIMITED%2C%20I%20would%20like%20to%20place%20an%20order.%20Please%20provide%20available%20colors%20and%20prices."
+      <a href="https://wa.me/2347058181425?text=Hello%20SAM%20AUTOS%20COLOR%20LIMITED%2C%20I%20would%20like%20to%20place%20an%20order.%20Please%20provide%20available%20colors%20and%20prices."
          class="btn btn-whatsapp" target="_blank" rel="noopener">
         <i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>WhatsApp</span>
       </a>
@@ -109,7 +109,7 @@
         <div class="hero-actions">
           <a href="#gallery" class="btn btn-primary"><span>Browse Products</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
           <a href="#order" class="btn btn-outline"><span>Order Now</span></a>
-          <a href="https://wa.me/+2347058181425?text=Hello%20SAM%20AUTOS%20COLOR%20LIMITED%2C%20I%20would%20like%20to%20place%20an%20order.%20Please%20provide%20available%20colors%20and%20prices."
+          <a href="https://wa.me/2347058181425?text=Hello%20SAM%20AUTOS%20COLOR%20LIMITED%2C%20I%20would%20like%20to%20place%20an%20order.%20Please%20provide%20available%20colors%20and%20prices."
              class="btn btn-ghost-whatsapp" target="_blank" rel="noopener">
             <i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span>Chat on WhatsApp</span>
           </a>
@@ -117,15 +117,15 @@
  
         <div class="hero-stats" id="heroStats">
           <div class="stat">
-            <span class="stat-num" data-count="20">10</span><span class="stat-suffix">+</span>
+            <span class="stat-num" data-count="10">10</span><span class="stat-suffix">+</span>
             <p>Years combined trade experience</p>
           </div>
           <div class="stat">
-            <span class="stat-num" data-count="500">20000</span><span class="stat-suffix">+</span>
+            <span class="stat-num" data-count="20000">20,000</span><span class="stat-suffix">+</span>
             <p>Products &amp; supplies stocked</p>
           </div>
           <div class="stat">
-            <span class="stat-num" data-count="1000">200</span><span class="stat-suffix">+</span>
+            <span class="stat-num" data-count="200">200</span><span class="stat-suffix">+</span>
             <p>Body shops &amp; dealers served</p>
           </div>
         </div>
@@ -207,11 +207,11 @@
       </div>
  
       <div class="filter-bar" id="filterBar" data-reveal="up">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="paints">Paints</button>
-        <button class="filter-btn" data-filter="finishing">Finishing</button>
-        <button class="filter-btn" data-filter="tools">Tools &amp; Guns</button>
-        <button class="filter-btn" data-filter="accessories">Accessories</button>
+        <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-btn" data-filter="paints" aria-pressed="false">Paints</button>
+        <button class="filter-btn" data-filter="finishing" aria-pressed="false">Finishing</button>
+        <button class="filter-btn" data-filter="tools" aria-pressed="false">Tools &amp; Guns</button>
+        <button class="filter-btn" data-filter="accessories" aria-pressed="false">Accessories</button>
       </div>
  
       <div class="gallery-grid" id="galleryGrid">
@@ -445,26 +445,27 @@
         <h2 class="section-title">Trusted by body shops across Nigeria</h2>
       </div>
  
-      <div class="reviews-slider" data-reveal="up">
+      <div class="reviews-slider" data-reveal="up" role="region" aria-roledescription="carousel" aria-label="Customer testimonials" tabindex="0">
+        <span class="sr-only" id="reviewsStatus" aria-live="polite" aria-atomic="true"></span>
         <div class="reviews-viewport">
         <div class="reviews-track" id="reviewsTrack">
           <blockquote class="review-card">
-            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <div class="stars" role="img" aria-label="Rated 5 out of 5 stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             <p>"Their colour matching is spot on every time. My spray jobs come out right the first time, no rework."</p>
             <cite>&mdash; Body Shop Owner, Onitsha</cite>
           </blockquote>
           <blockquote class="review-card">
-            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <div class="stars" role="img" aria-label="Rated 5 out of 5 stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             <p>"I order in bulk for my panel beating shop and delivery is always on time. Genuine products, fair price."</p>
             <cite>&mdash; Panel Beater, Awka</cite>
           </blockquote>
           <blockquote class="review-card">
-            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <div class="stars" role="img" aria-label="Rated 5 out of 5 stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             <p>"From primer to clear coat, everything I need is in one place. Their team actually knows the products."</p>
             <cite>&mdash; Dealership Refinish Lead, Lagos</cite>
           </blockquote>
           <blockquote class="review-card">
-            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <div class="stars" role="img" aria-label="Rated 5 out of 5 stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
             <p>"WhatsApp ordering makes restocking painless. I send a list, get a quote back same hour."</p>
             <cite>&mdash; Independent Sprayer, Enugu</cite>
           </blockquote>
@@ -498,26 +499,26 @@
         <form class="order-form glass" id="orderForm" novalidate data-reveal="left">
           <div class="form-row">
             <label for="custName">Customer Name</label>
-            <input type="text" id="custName" name="custName" placeholder="e.g. Chidi Okafor" autocomplete="name" required>
+            <input type="text" id="custName" name="custName" placeholder="e.g. Chidi Okafor" autocomplete="name" required aria-describedby="err-custName">
             <span class="error-msg" id="err-custName"></span>
           </div>
  
           <div class="form-row">
             <label for="custPhone">Phone Number</label>
-            <input type="tel" id="custPhone" name="custPhone" placeholder="e.g. 0803 123 4567" autocomplete="tel" required>
+            <input type="tel" id="custPhone" name="custPhone" placeholder="e.g. 0803 123 4567" autocomplete="tel" required aria-describedby="err-custPhone">
             <span class="error-msg" id="err-custPhone"></span>
           </div>
  
           <div class="form-row">
             <label for="prodName">Product Name</label>
-            <input type="text" id="prodName" name="prodName" placeholder="e.g. Base Coat, Clear Coat, Primer" required>
+            <input type="text" id="prodName" name="prodName" placeholder="e.g. Base Coat, Clear Coat, Primer" required aria-describedby="err-prodName">
             <span class="error-msg" id="err-prodName"></span>
           </div>
  
           <div class="form-row form-row-split">
             <div>
               <label for="qty">Quantity</label>
-              <input type="number" id="qty" name="qty" placeholder="e.g. 4" min="1" required>
+              <input type="number" id="qty" name="qty" placeholder="e.g. 4" min="1" required aria-describedby="err-qty">
               <span class="error-msg" id="err-qty"></span>
             </div>
             <div>
@@ -629,7 +630,7 @@
         <div class="contact-card glass" data-reveal="up">
           <i class="fa-brands fa-whatsapp"></i>
           <h3>WhatsApp</h3>
-          <p><a href="https://wa.me/+2347058181425" target="_blank" rel="noopener">+234 705 818 1425</a></p>
+          <p><a href="https://wa.me/2347058181425" target="_blank" rel="noopener">+234 705 8181 425</a></p>
         </div>
         <div class="contact-card glass" data-reveal="up">
           <i class="fa-solid fa-envelope"></i>
@@ -680,7 +681,7 @@
         <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
         <a href="#" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="https://wa.me/+2347058181425" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://wa.me/2347058181425" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
       </div>
     </div>
  
@@ -702,19 +703,19 @@
     <div class="footer-col">
       <h4>Contact</h4>
       <p>No. 23, 95 Modebe Ave, Onitsha, Anambra</p>
-      <p><a href="tel:+2347058181425">+234 7058 181 425</a></p>
+      <p><a href="tel:+2347058181425">+234 705 8181 425</a></p>
       <p><a href="mailto:info@samautoscolor.com">info@samautoscolor.com</a></p>
     </div>
   </div>
  
   <div class="footer-bottom">
-    <p>&copy; <span id="year"></span>SAM AUTOS COLOR LIMITED. All rights reserved.</p>
+    <p>&copy; <span id="year"></span> SAM AUTOS COLOR LIMITED. All rights reserved.</p>
     <p>Designed with <i class="fa-solid fa-heart" aria-hidden="true"></i></p>
   </div>
 </footer>
  
 <!-- Floating Actions -->
-<a href="https://wa.me/+2347058181425?text=Hello%20SAM%20AUTOS%20COLOR%20LIMITED%2C%20I%20would%20like%20to%20place%20an%20order.%20Please%20provide%20available%20colors%20and%20prices."
+<a href="https://wa.me/2347058181425?text=Hello%20SAM%20AUTOS%20COLOR%20LIMITED%2C%20I%20would%20like%20to%20place%20an%20order.%20Please%20provide%20available%20colors%20and%20prices."
    class="fab fab-whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
   <i class="fa-brands fa-whatsapp"></i>
 </a>
@@ -722,6 +723,6 @@
   <i class="fa-solid fa-arrow-up"></i>
 </button>
  
-<script src="script.js?v=814846b3"></script>
+<script src="script.js?v=32c370c6"></script>
 </body>
 </html>
