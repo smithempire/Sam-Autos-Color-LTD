@@ -1,0 +1,24 @@
+#!/bin/sh
+# Auto cache-busting.
+# When style.css or script.js are part of a commit, refresh the ?v= tag on their
+# <link>/<script> references in index.html so browsers fetch the new file instead
+# of a stale cached copy. The version is each file's short content hash, so it
+# changes if and only if the file's content changes.
+#
+# Enabled per clone via:  git config core.hooksPath .githooks
+set -e
+
+# Act only when the assets themselves are staged in this commit.
+staged=$(git diff --cached --name-only)
+echo "$staged" | grep -qE '(^|/)(style\.css|script\.js)$' || exit 0
+
+style_v=$(git hash-object style.css | cut -c1-8)
+script_v=$(git hash-object script.js | cut -c1-8)
+
+sed -i \
+  -e "s#style\.css?v=[A-Za-z0-9._-]*#style.css?v=${style_v}#g" \
+  -e "s#script\.js?v=[A-Za-z0-9._-]*#script.js?v=${script_v}#g" \
+  index.html
+
+git add index.html
+echo "pre-commit: cache-bust -> style.css?v=${style_v}  script.js?v=${script_v}"
