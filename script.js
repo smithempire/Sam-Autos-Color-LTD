@@ -29,7 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateActiveNav();
   }
   document.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  // NOTE: the initial onScroll() call is made further down, AFTER `sections` and
+  // `navItems` are declared. Calling it here would make updateActiveNav() read
+  // those `const`s in their temporal dead zone → ReferenceError that aborts every
+  // feature set up after this line (slider, accordion, mobile menu, form, year...).
  
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -38,19 +41,33 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Mobile Menu ---------- */
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
- 
+
+  // Backdrop behind the sliding panel — tapping it closes the menu.
+  const navBackdrop = document.createElement('div');
+  navBackdrop.className = 'nav-backdrop';
+  document.body.appendChild(navBackdrop);
+
+  function setMenu(open){
+    navLinks.classList.toggle('open', open);
+    hamburger.classList.toggle('open', open);
+    navBackdrop.classList.toggle('open', open);
+    document.body.classList.toggle('menu-open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+  }
+  const closeMenu = () => setMenu(false);
+
   hamburger.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    hamburger.classList.toggle('open', isOpen);
-    hamburger.setAttribute('aria-expanded', isOpen);
+    setMenu(!navLinks.classList.contains('open'));
   });
- 
+
+  navBackdrop.addEventListener('click', closeMenu);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
   navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      hamburger.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-    });
+    link.addEventListener('click', closeMenu);
   });
  
   /* ---------- Smooth Scroll (native CSS handles most; ensure anchor offset) ---------- */
@@ -85,7 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
       link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
     });
   }
- 
+
+  // `sections` and `navItems` are now initialized, so it is finally safe to run
+  // the initial scroll sync (moved down from the onScroll definition above).
+  onScroll();
+
   /* ---------- Scroll Reveal Animations ---------- */
   const revealEls = document.querySelectorAll('[data-reveal]');
   const revealObserver = new IntersectionObserver((entries) => {
@@ -230,7 +251,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.acc-item').forEach(item => {
     const trigger = item.querySelector('.acc-trigger');
     const panel = item.querySelector('.acc-panel');
- 
+
+    // Collapsed on load: mark inert so the answer is pruned from the accessibility
+    // tree (max-height:0 hides it only visually — otherwise a screen reader reads
+    // every collapsed answer aloud despite aria-expanded="false").
+    panel.inert = true;
+
     trigger.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
  
@@ -238,16 +264,39 @@ document.addEventListener('DOMContentLoaded', () => {
         if (openItem !== item){
           openItem.classList.remove('open');
           openItem.querySelector('.acc-trigger').setAttribute('aria-expanded', 'false');
-          openItem.querySelector('.acc-panel').style.maxHeight = null;
+          const op = openItem.querySelector('.acc-panel');
+          op.style.maxHeight = null;
+          op.inert = true;
         }
       });
  
       item.classList.toggle('open', !isOpen);
       trigger.setAttribute('aria-expanded', String(!isOpen));
       panel.style.maxHeight = !isOpen ? panel.scrollHeight + 'px' : null;
+      panel.inert = isOpen; // inert when it was open (now closing); interactive when opening
     });
   });
- 
+
+  // Keep any open panel's max-height in sync with its content when the viewport
+  // reflows (rotation/resize). The height is otherwise frozen at click time, so a
+  // narrower reflow would clip the answer under overflow:hidden. Debounced via a
+  // timer (fires regardless of tab visibility, unlike requestAnimationFrame), with
+  // the transition suppressed so it doesn't animate on every resize tick.
+  let accResizeTimer;
+  function refreshOpenPanels(){
+    document.querySelectorAll('.acc-item.open .acc-panel').forEach(p => {
+      p.style.transition = 'none';
+      p.style.maxHeight = p.scrollHeight + 'px';
+      void p.offsetHeight; // force reflow so the suppressed transition applies cleanly
+      p.style.transition = '';
+    });
+  }
+  window.addEventListener('resize', () => {
+    clearTimeout(accResizeTimer);
+    accResizeTimer = setTimeout(refreshOpenPanels, 100);
+  });
+  window.addEventListener('orientationchange', refreshOpenPanels);
+
   /* ---------- Order Form Validation + WhatsApp Handoff ---------- */
   const orderForm = document.getElementById('orderForm');
   const formSuccess = document.getElementById('formSuccess');
