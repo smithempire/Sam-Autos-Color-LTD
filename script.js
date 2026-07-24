@@ -10,6 +10,16 @@
 (function () {
   'use strict';
 
+  /* ---------- Fresh-content guard (bfcache) ----------
+     When a browser restores this page from its back/forward cache — most notably
+     iOS Safari reviving an old tab — `pageshow` fires with persisted=true and the
+     visitor sees a frozen, possibly-stale rendering that never hit the network.
+     Reloading in that case guarantees they always get the latest deployed version.
+     Registered immediately (not deferred) so it works regardless of the rest of init. */
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) window.location.reload();
+  });
+
   /* Canonical business WhatsApp number (digits only, for wa.me links). */
   var WA_NUMBER = '2347058181425';
 
