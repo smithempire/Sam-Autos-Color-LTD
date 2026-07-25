@@ -64,6 +64,9 @@ html {
   text-size-adjust: 100%;
 }
 html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+/* Clip any decorative horizontal bleed at the content level too, so we never
+   depend on root overflow-x:hidden (which several mobile engines ignore). */
+main { overflow-x: hidden; overflow-x: clip; }
 
 body {
   font-family: var(--font-body);
@@ -94,8 +97,15 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; letter-spac
 
 /* ---------- Utilities ---------- */
 .container {
-  width: min(100% - (var(--page-padding) * 2), var(--container-width));
-  margin-inline: auto;
+  /* Robust, universally-supported container sizing.
+     Avoids width:min() — some grid engines treat a min()-sized container as
+     "indefinite" and collapse grid items to min-content (narrow-column bug). */
+  width: 100%;
+  max-width: calc(var(--container-width) + (var(--page-padding) * 2));
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--page-padding);
+  padding-right: var(--page-padding);
 }
 
 .sr-only {
@@ -213,7 +223,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; letter-spac
 /* Off-canvas panel (mobile) */
 .nav-links {
   position: fixed; top: 0; right: 0; z-index: 500;
-  height: 100vh; height: 100dvh; width: min(320px, 84vw);
+  height: 100vh; height: 100dvh; width: 84vw; max-width: 320px;
   padding: calc(var(--header-h) + 28px) 26px 30px;
   padding-right: max(26px, env(safe-area-inset-right));
   display: flex; flex-direction: column; align-items: stretch; gap: 6px;
