@@ -280,10 +280,10 @@ body.is-menu-open { overflow: hidden; }
 .stat-suffix { color: var(--orange); }
 .stat dd { font-size: 12.5px; color: var(--text-muted); max-width: 150px; margin-top: 2px; }
 
-/* Hero visual (paint fan) — hidden on small screens, shown on desktop */
-.hero-visual { display: none; position: relative; height: 420px; }
+/* Hero visual (paint fan) — shown on all sizes; sits above the copy on mobile */
+.hero-visual { display: block; position: relative; height: 320px; order: -1; margin-bottom: 6px; }
 .fan-wrap { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-.paint-fan { position: relative; width: 260px; height: 320px; }
+.paint-fan { position: relative; width: 230px; height: 280px; }
 .paint-fan .chip {
   position: absolute; bottom: 0; left: 50%; width: 66px; height: 280px;
   border-radius: 14px 14px 56px 56px; background: var(--c);
@@ -316,9 +316,9 @@ body.is-menu-open { overflow: hidden; }
 
 /* Reveal animation (progressive; content visible without JS) */
 @media (prefers-reduced-motion: no-preference) {
-  [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
-  [data-reveal="left"] { transform: translateX(24px); }
-  [data-reveal="right"] { transform: translateX(-24px); }
+  /* Vertical-only reveal — a horizontal translate on a full-width element would
+     push it past the viewport (a masked overflow source) before it animates in. */
+  [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
   [data-reveal].is-visible { opacity: 1; transform: none; }
 }
 
@@ -527,7 +527,8 @@ body.is-menu-open { overflow: hidden; }
   .hero-inner { grid-template-columns: 1.05fr 0.95fr; gap: 48px; }
   .hero-title { font-size: clamp(2.6rem, 4vw, 3.6rem); }
   .hero-sub { font-size: 17px; }
-  .hero-visual { display: block; }
+  .hero-visual { order: 0; height: 420px; margin-bottom: 0; }
+  .paint-fan { width: 260px; height: 320px; }
   .scroll-cue { display: block; }
 
   .about-grid { grid-template-columns: 1.05fr 0.95fr; gap: 56px; }
